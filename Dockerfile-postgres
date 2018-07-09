@@ -1,0 +1,12 @@
+FROM alpine:3.8 as scripts
+
+MAINTAINER andrey.dyachkov@gmail.com
+
+WORKDIR /tmp
+RUN apk add --no-cache curl wget jq tar
+RUN wget -O nakadi.tar.gz $(curl --silent "https://api.github.com/repos/zalando/nakadi/releases/latest" | jq -r .tarball_url)
+RUN tar -xvf nakadi.tar.gz --strip-components=1
+
+FROM postgres:9.5
+COPY --from=scripts /tmp/database/nakadi /docker-entrypoint-initdb.d
+
