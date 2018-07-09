@@ -13,7 +13,7 @@ Srart Nakadi docker container using `host` network (dependencies are running in 
 docker run -e SPRING_PROFILES_ACTIVE=local -e NAKADI_OAUTH2_MODE=OFF --network=host adyach/nakadi-docker:latest
 ```
 ## Using docker compose
-Note: the setup was tested agoinst [integration smoke test](https://github.com/zalando/nakadi/blob/167c0c1206b83128f5ec16b5808d54ec20c75c82/src/acceptance-test/java/org/zalando/nakadi/webservice/UserJourneyAT.java)
+Note: the setup was tested against [integration smoke test](https://github.com/zalando/nakadi/blob/167c0c1206b83128f5ec16b5808d54ec20c75c82/src/acceptance-test/java/org/zalando/nakadi/webservice/UserJourneyAT.java)
 ```
 docker-compose up
 ```
