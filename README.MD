@@ -8,7 +8,7 @@ Download [Nakadi](https://github.com/zalando/nakadi/releases) and start its depe
 ```
 ./gradlew startStorages
 ```
-Srart Nakadi docker container using `host` network (dependencies are running in host network)
+Start Nakadi docker container using `host` network (dependencies are running in host network)
 ```
 docker run -e SPRING_PROFILES_ACTIVE=local -e NAKADI_OAUTH2_MODE=OFF --network=host adyach/nakadi-docker:latest
 ```
