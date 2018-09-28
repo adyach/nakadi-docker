@@ -1,0 +1,32 @@
+{
+  "admins": [
+    {
+      "data_type": "user",
+      "value": "adminClientId"
+    },
+    {
+      "data_type": "service",
+      "value": "adminClientId-service"
+    }
+  ],
+  "writers": [
+    {
+      "data_type": "user",
+      "value": "adminClientId"
+    },
+    {
+      "data_type": "service",
+      "value": "adminClientId-service"
+    }
+  ],
+  "readers": [
+    {
+      "data_type": "user",
+      "value": "adminClientId"
+    },
+    {
+      "data_type": "service",
+      "value": "adminClientId-service"
+    }
+  ]
+}
