@@ -22,7 +22,7 @@ docker run \
 --network=host -t adyach/nakadi-docker:latest
 ```
 Note: [authz config is used](https://github.com/adyach/nakadi-docker/blob/master/data/authz.json). it is not possible to configure UID of an oauth2 token, when running Nakadi in NAKADI_OAUTH2_MODE=OFF, that's why the [UID is allways `adminClientId`](https://github.com/zalando/nakadi/blob/effb2ed7e95bd329ab73ce06b2857aa57510e539/src/main/java/org/zalando/nakadi/security/ClientResolver.java#L27).
-It was not tested, but it should be possible to replace authz.json in container using `-v` option [docker volumes](https://docs.docker.com/storage/volumes)
+It should be possible to replace authz.json in container using `-v` option [docker volumes](https://docs.docker.com/storage/volumes)
 
 ## Using docker compose
 Note: the setup was tested against [integration smoke test](https://github.com/zalando/nakadi/blob/167c0c1206b83128f5ec16b5808d54ec20c75c82/src/acceptance-test/java/org/zalando/nakadi/webservice/UserJourneyAT.java)
