@@ -15,7 +15,7 @@ FROM openjdk:8u171-jdk-alpine3.7
 
 # configure Nakadi
 COPY --from=builder /tmp/build/libs/nakadi.jar .
-COPY --from=builder /tmp/api/nakadi-event-bus-api.yaml .
+COPY --from=builder /tmp/api/nakadi-event-bus-api.yaml ./api/nakadi-event-bus-api.yaml
 
 # file based authz config
 COPY --from=builder /tmp/plugins/nakadi-authz-file-plugin-0.1.jar ./plugins/nakadi-authz-file-plugin-0.1.jar
