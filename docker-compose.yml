@@ -13,6 +13,7 @@ services:
       - NAKADI_OAUTH2_MODE=OFF
       - NAKADI_ZOOKEEPER_BROKERS=zookeeper:2181
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/local_nakadi_db
+      - NAKADI_PLUGINS_AUTHZ_FACTORY=org.crazycoder.nakadiauthzfileplugin.FileAuthorizationServiceFactory
 
   postgres:
     image: adyach/nakadi-postgres:latest

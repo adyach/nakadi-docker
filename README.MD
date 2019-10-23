@@ -19,7 +19,7 @@ docker run \
 -e SPRING_PROFILES_ACTIVE=local \
 -e NAKADI_OAUTH2_MODE=OFF \
 -e NAKADI_PLUGINS_AUTHZ_FACTORY=org.crazycoder.nakadiauthzfileplugin.FileAuthorizationServiceFactory \
---network=host -t adyach/nakadi-docker:latest
+-p 8080:8080 -t adyach/nakadi-docker:latest
 ```
 Note: [authz config is used](https://github.com/adyach/nakadi-docker/blob/master/data/authz.json). it is not possible to configure UID of an oauth2 token, when running Nakadi in NAKADI_OAUTH2_MODE=OFF, that's why the [UID is allways `adminClientId`](https://github.com/zalando/nakadi/blob/effb2ed7e95bd329ab73ce06b2857aa57510e539/src/main/java/org/zalando/nakadi/security/ClientResolver.java#L27).
 It should be possible to replace authz.json in container using `-v` option [docker volumes](https://docs.docker.com/storage/volumes)
