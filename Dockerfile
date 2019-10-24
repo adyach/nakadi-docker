@@ -6,7 +6,7 @@ WORKDIR /tmp
 RUN apt-get update && apt-get install -y curl wget jq tar
 RUN wget -O nakadi.tar.gz $(curl --silent "https://api.github.com/repos/zalando/nakadi/releases/latest" | jq -r .tarball_url)
 RUN tar -xvf nakadi.tar.gz --strip-components=1
-RUN wget -O nakadi-authz-file-plugin-0.2.jar https://github.com/adyach/nakadi-authz-file-plugin/releases/download/v0.2.1/nakadi-authz-file-plugin-0.2.jar
+RUN wget -O nakadi-authz-file-plugin-0.2.jar https://github.com/adyach/nakadi-authz-file-plugin/releases/download/v0.2.2/nakadi-authz-file-plugin-0.2.2.jar
 RUN cp nakadi-authz-file-plugin-0.2.jar plugins/nakadi-authz-file-plugin-0.2.jar
 RUN chmod u+x gradlew
 RUN ./gradlew assemble
