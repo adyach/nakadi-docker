@@ -31,9 +31,9 @@ jobs:
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$PG_IMAGE_NAME
           echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$ZK_VERSION
-          docker tag image $IMAGE_ID:$ZK_VERSION
-          docker push $IMAGE_ID:$ZK_VERSION
+          echo VERSION=$PG_VERSION
+          docker tag image $IMAGE_ID:$PG_VERSION
+          docker push $IMAGE_ID:$PG_VERSION
 
       - name: Build zookeeper image
         run: docker build . --file Dockerfile-zookeeper --tag image
