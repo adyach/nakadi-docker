@@ -12,6 +12,7 @@ env:
   PG_IMAGE_NAME: postgres
   ZK_VERSION: 3.5.8
   ZK_IMAGE_NAME: zookeeper
+  NAKADI_IMAGE_NAME: nakadi
 
 jobs:
   # Push image to GitHub Packages.
@@ -22,6 +23,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Build nakadi image
+        run: docker build . --file Dockerfile --tag image
+
+      - name: Push nakadi image
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$NAKADI_IMAGE_NAME
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=latest
+          docker tag image $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
 
       - name: Build postgres image
         run: docker build . --file Dockerfile-postgres --tag image
