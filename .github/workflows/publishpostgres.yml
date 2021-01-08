@@ -28,7 +28,7 @@ jobs:
 
       - name: Push postgres image
         run: |
-	  echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$PG_IMAGE_NAME
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$ZK_VERSION
