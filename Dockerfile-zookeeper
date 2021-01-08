@@ -1,0 +1,18 @@
+FROM openjdk:8-alpine
+
+MAINTAINER andrey.dyachkov@gmail.com
+
+ENV ZOOKEEPER_VERSION=3.5.8
+
+#Download Zookeeper
+RUN wget -q https://downloads.apache.org/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz && \
+tar -xzf apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz -C /opt && \
+mv /opt/apache-zookeeper-${ZOOKEEPER_VERSION}-bin/conf/zoo_sample.cfg /opt/apache-zookeeper-${ZOOKEEPER_VERSION}-bin/conf/zoo.cfg && \
+apk add bash
+
+EXPOSE 2181 2888 3888
+
+WORKDIR /opt/apache-zookeeper-${ZOOKEEPER_VERSION}-bin
+VOLUME ["/opt/apache-zookeeper-${ZOOKEEPER_VERSION}-bin/conf", "/opt/apache-zookeeper-${ZOOKEEPER_VERSION}-bin/data"]
+
+CMD bash /opt/apache-zookeeper-${ZOOKEEPER_VERSION}-bin/bin/zkServer.sh start-foreground

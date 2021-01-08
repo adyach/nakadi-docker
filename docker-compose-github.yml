@@ -1,0 +1,47 @@
+version: '2'
+services:
+  nakadi:
+    image: adyach/nakadi-docker:latest
+    ports:
+     - "8080:8080"
+    depends_on:
+     - postgres
+     - zookeeper
+     - kafka
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+      - NAKADI_OAUTH2_MODE=OFF
+      - NAKADI_ZOOKEEPER_BROKERS=zookeeper:2181
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/local_nakadi_db
+      - NAKADI_PLUGINS_AUTHZ_FACTORY=org.crazycoder.nakadiauthzfileplugin.FileAuthorizationServiceFactory
+
+  postgres:
+    image: docker.pkg.github.com/adyach/nakadi-docker/postgres-docker:9.5
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: nakadi
+      POSTGRES_PASSWORD: nakadi
+      POSTGRES_DB: local_nakadi_db
+
+  zookeeper:
+    image: docker.pkg.github.com/adyach/zookeeper-docker-github/zookeeper:3.5.8
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: docker.pkg.github.com/adyach/kafka-docker/kafka-docker:2.7.0
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+      KAFKA_DELETE_TOPIC_ENABLE: 'true'
+      KAFKA_BROKER_ID: 0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+

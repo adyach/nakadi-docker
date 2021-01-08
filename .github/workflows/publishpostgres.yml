@@ -8,8 +8,10 @@ on:
 
 env:
   # TODO: Change variable to your image's name.
-  VERSION: 9.5
-  IMAGE_NAME: postgres-docker
+  PG_VERSION: 9.5
+  PG_IMAGE_NAME: postgres
+  ZK_VERSION: 3.5.8
+  ZK_IMAGE_NAME: zookeeper
 
 jobs:
   # Push image to GitHub Packages.
@@ -21,16 +23,28 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
-        run: docker build . --file Dockerfile --tag image
+      - name: Build postgres image
+        run: docker build . --file Dockerfile-postgres --tag image
 
-      - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-
-      - name: Push image
+      - name: Push postgres image
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+	  echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$PG_IMAGE_NAME
           echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-          docker tag image $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          echo VERSION=$ZK_VERSION
+          docker tag image $IMAGE_ID:$ZK_VERSION
+          docker push $IMAGE_ID:$ZK_VERSION
+
+      - name: Build postgres image
+        run: docker build . --file Dockerfile-zookeeper --tag image
+
+      - name: Push postgres image
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$ZK_IMAGE_NAME
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$ZK_VERSION
+          docker tag image $IMAGE_ID:$ZK_VERSION
+          docker push $IMAGE_ID:$ZK_VERSION
+
+
