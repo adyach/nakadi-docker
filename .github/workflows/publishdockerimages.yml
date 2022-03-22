@@ -29,8 +29,8 @@ jobs:
 
       - name: Push nakadi image
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$NAKADI_IMAGE_NAME
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$NAKADI_IMAGE_NAME
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=latest
           docker tag image $IMAGE_ID:latest
@@ -41,8 +41,8 @@ jobs:
 
       - name: Push postgres image
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$PG_IMAGE_NAME
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$PG_IMAGE_NAME
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$PG_VERSION
           docker tag image $IMAGE_ID:$PG_VERSION
@@ -53,8 +53,8 @@ jobs:
 
       - name: Push zookeeper image
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$ZK_IMAGE_NAME
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$ZK_IMAGE_NAME
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$ZK_VERSION
           docker tag image $IMAGE_ID:$ZK_VERSION
