@@ -1,7 +1,7 @@
 version: '2'
 services:
   nakadi:
-    image: ghcr.io/adyach/nakadi-docker-arm64/nakadi:latest
+    image: ghcr.io/adyach/nakadi-docker/nakadi-arm64:latest
     ports:
       - "8080:8080"
     depends_on:
@@ -16,7 +16,7 @@ services:
       - NAKADI_PLUGINS_AUTHZ_FACTORY=org.crazycoder.nakadiauthzfileplugin.FileAuthorizationServiceFactory
 
   postgres:
-    image: ghcr.io/adyach/nakadi-docker-arm64/postgres:13.6
+    image: ghcr.io/adyach/nakadi-docker/postgres-arm64:13.6
     ports:
       - "5432:5432"
     volumes:

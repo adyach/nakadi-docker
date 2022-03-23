@@ -33,7 +33,7 @@ jobs:
       - name: Push nakadi image
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          IMAGE_ID=ghcr.io/${{ github.repository }}-arm64/$NAKADI_IMAGE_NAME
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$NAKADI_IMAGE_NAME-arm64
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=latest
           docker tag image $IMAGE_ID:latest
@@ -45,7 +45,7 @@ jobs:
       - name: Push postgres image
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-          IMAGE_ID=ghcr.io/${{ github.repository }}-arm64/$PG_IMAGE_NAME
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$PG_IMAGE_NAME-arm64
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$PG_VERSION
           docker tag image $IMAGE_ID:$PG_VERSION
