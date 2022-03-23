@@ -28,7 +28,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build nakadi image
-        run: docker buildx build --platform linux/arm64 --file ./arm64/Dockerfile --tag image
+        run: docker buildx build --platform linux/arm64 --file ./arm64/Dockerfile --tag image .
 
       - name: Push nakadi image
         run: |
@@ -40,7 +40,7 @@ jobs:
           docker push $IMAGE_ID:latest
 
       - name: Build postgres image
-        run: docker buildx build --platform linux/arm64 --file ./arm64/Dockerfile-postgres --tag image
+        run: docker buildx build --platform linux/arm64 --file ./arm64/Dockerfile-postgres --tag image .
 
       - name: Push postgres image
         run: |
