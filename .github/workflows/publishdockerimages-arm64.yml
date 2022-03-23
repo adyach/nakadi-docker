@@ -21,6 +21,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          arch: aarch64
+          distro: ubuntu20.04
 
       - name: Build nakadi image
         run: docker build . --file ./arm64/Dockerfile --tag image
