@@ -61,4 +61,5 @@ jobs:
 
       - name: Start Nakadi
         run: |
-          docker-compose -f docker-compose-github.yml up
+          docker-compose -f docker-compose-github.yml up -d
+          docker logs -f nakadi-docker_nakadi_1
