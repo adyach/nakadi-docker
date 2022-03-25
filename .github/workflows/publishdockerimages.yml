@@ -66,14 +66,12 @@ jobs:
       - name: Check Nakadi lists event types
         run: |
           docker-compose -f docker-compose-github.yml up -d
-          sleep 30
-          curl -vvv http://localhost:8080/event-types/nakadi.access.log
-#          x=1
-#          while [[ x -lt 10 ]]; do
-#            res=$(curl -s -w "%{http_code}" -o /dev/null http://localhost:8080/event-types/nakadi.access.log)
-#            if ((res == 200)); then
-#              return
-#            fi
-#            sleep 5
-#            x=$((x + 1))
-#          done
+          x=1
+          while [[ x -lt 10 ]]; do
+            res=$(curl -s -w "%{http_code}" -o /dev/null http://localhost:8080/event-types/nakadi.access.log)
+            if ((res == 200)); then
+              return
+            fi
+            sleep 5
+            x=$((x + 1))
+          done
