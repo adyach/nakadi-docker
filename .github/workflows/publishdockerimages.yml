@@ -13,6 +13,7 @@ env:
   ZK_VERSION: 3.6.3
   ZK_IMAGE_NAME: zookeeper
   NAKADI_IMAGE_NAME: nakadi
+  NAKADI_VERSION: 3.4
 
 jobs:
   # Push image to GitHub Packages.
@@ -23,45 +24,47 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-#      - name: Build nakadi image
-#        run: docker build . --file Dockerfile --tag image
-#
-#      - name: Push nakadi image
-#        run: |
-#          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-#          IMAGE_ID=ghcr.io/${{ github.repository }}/$NAKADI_IMAGE_NAME
-#          echo IMAGE_ID=$IMAGE_ID
-#          echo VERSION=latest
-#          docker tag image $IMAGE_ID:latest
-#          docker push $IMAGE_ID:latest
-#
-#      - name: Build postgres image
-#        run: docker build . --file Dockerfile-postgres --tag image
-#
-#      - name: Push postgres image
-#        run: |
-#          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-#          IMAGE_ID=ghcr.io/${{ github.repository }}/$PG_IMAGE_NAME
-#          echo IMAGE_ID=$IMAGE_ID
-#          echo VERSION=$PG_VERSION
-#          docker tag image $IMAGE_ID:$PG_VERSION
-#          docker tag image $IMAGE_ID:latest
-#          docker push $IMAGE_ID:$PG_VERSION
-#          docker push $IMAGE_ID:latest
-#
-#      - name: Build zookeeper image
-#        run: docker build . --file Dockerfile-zookeeper --tag image
-#
-#      - name: Push zookeeper image
-#        run: |
-#          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-#          IMAGE_ID=ghcr.io/${{ github.repository }}/$ZK_IMAGE_NAME
-#          echo IMAGE_ID=$IMAGE_ID
-#          echo VERSION=$ZK_VERSION
-#          docker tag image $IMAGE_ID:$ZK_VERSION
-#          docker tag image $IMAGE_ID:latest
-#          docker push $IMAGE_ID:$ZK_VERSION
-#          docker push $IMAGE_ID:latest
+      - name: Build nakadi image
+        run: docker build . --file Dockerfile --tag image
+
+      - name: Push versioned nakadi image
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$NAKADI_IMAGE_NAME
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$NAKADI_VERSION
+          docker tag image $IMAGE_ID:latest
+          docker tag image $IMAGE_ID:$NAKADI_VERSION
+          docker push $IMAGE_ID:latest
+          docker push $IMAGE_ID:$NAKADI_VERSION
+
+      - name: Build postgres image
+        run: docker build . --file Dockerfile-postgres --tag image
+
+      - name: Push postgres image
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$PG_IMAGE_NAME
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$PG_VERSION
+          docker tag image $IMAGE_ID:$PG_VERSION
+          docker tag image $IMAGE_ID:latest
+          docker push $IMAGE_ID:$PG_VERSION
+          docker push $IMAGE_ID:latest
+
+      - name: Build zookeeper image
+        run: docker build . --file Dockerfile-zookeeper --tag image
+
+      - name: Push zookeeper image
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$ZK_IMAGE_NAME
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$ZK_VERSION
+          docker tag image $IMAGE_ID:$ZK_VERSION
+          docker tag image $IMAGE_ID:latest
+          docker push $IMAGE_ID:$ZK_VERSION
+          docker push $IMAGE_ID:latest
 
       - name: Check Nakadi lists event types
         run: |
