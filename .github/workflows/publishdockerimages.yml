@@ -60,6 +60,6 @@ jobs:
 #          docker push $IMAGE_ID:$ZK_VERSION
 
       - name: Start Nakadi
+        uses: wei/curl@v1
         run: |
-          docker-compose -f docker-compose-github.yml up -d
-          curl --retry 100 --retry-connrefused -s http://localhost:8080/event-types/nakadi.access.log
+          docker-compose -f docker-compose-github.yml up
