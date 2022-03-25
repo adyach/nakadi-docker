@@ -64,5 +64,14 @@ jobs:
       - name: Check running containers
         run: docker ps -a
       - name: Check Nakadi lists event types
-        run: curl --fail 127.0.0.1:8080/event-types/nakadi.access.log
+        run: |
+          x=1
+          while [[ x -lt 10 ]]; do
+            res=$(curl -s -w "%{http_code}" -o /dev/null http://localhost:8080/event-types/nakadi.access.log)
+            if ((res == 200)); then
+              return
+            fi
+            sleep 10
+            x=$((x + 1))
+          done
 
