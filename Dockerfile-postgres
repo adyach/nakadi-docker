@@ -4,7 +4,7 @@ MAINTAINER andrey.dyachkov@gmail.com
 
 RUN mkdir nakadi
 WORKDIR /nakadi
-RUN git clone https://github.com/zalando/nakadi.git .
+RUN apk add git && git clone https://github.com/zalando/nakadi.git .
 
 FROM postgres:13.6
 COPY --from=scripts /nakadi/database/nakadi /docker-entrypoint-initdb.d
