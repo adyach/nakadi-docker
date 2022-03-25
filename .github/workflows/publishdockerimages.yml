@@ -62,4 +62,4 @@ jobs:
       - name: Start Nakadi
         run: |
           docker-compose -f docker-compose-github.yml up -d
-          curl --retry-connrefused --retry-all-errors --fail --retry 100 http://localhost:8080/event-types/nakadi.access.log
+          curl --retry 100 --retry-connrefused --fail http://localhost:8080/event-types/nakadi.access.log
