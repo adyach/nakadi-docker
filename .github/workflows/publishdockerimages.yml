@@ -60,11 +60,7 @@ jobs:
 #          docker push $IMAGE_ID:$ZK_VERSION
 
       - name: Start Nakadi
-        run: docker-compose -f docker-compose-github.yml up -d
-      - name: Check running containers
-        run: docker ps -a
-      - name: Check Nakadi lists event types
         run: |
+          docker-compose -f docker-compose-github.yml up -d
           sleep 50
           curl -vvv --fail 127.0.0.1:8080/event-types/nakadi.access.log
-
