@@ -60,6 +60,5 @@ jobs:
 #          docker push $IMAGE_ID:$ZK_VERSION
 
       - name: Start Nakadi
-        uses: wei/curl@v1
         run: |
           docker-compose -f docker-compose-github.yml up
