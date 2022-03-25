@@ -63,11 +63,11 @@ jobs:
         run: |
           docker-compose -f docker-compose-github.yml up -d
           x=1
-          while [[ x -lt 10 ]]; do
+          while [[ x -lt 30 ]]; do
             res=$(curl -s -w "%{http_code}" -o /dev/null http://localhost:8080/event-types/nakadi.access.log)
             if ((res == 200)); then
               return
             fi
-            sleep 5
+            sleep 10
             x=$((x + 1))
           done
