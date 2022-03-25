@@ -8,15 +8,14 @@ on:
 
 env:
   # TODO: Change variable to your image's name.
-  PG_VERSION: 9.5
+  PG_VERSION: 13.6
   PG_IMAGE_NAME: postgres
-  ZK_VERSION: 3.5.8
+  ZK_VERSION: 3.6.3
   ZK_IMAGE_NAME: zookeeper
   NAKADI_IMAGE_NAME: nakadi
 
 jobs:
   # Push image to GitHub Packages.
-  # See also https://docs.docker.com/docker-hub/builds/
   push:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -60,4 +59,10 @@ jobs:
           docker tag image $IMAGE_ID:$ZK_VERSION
           docker push $IMAGE_ID:$ZK_VERSION
 
+      - name: Start Nakadi
+        run: docker-compose -f docker-compose-github.yml up -d
+      - name: Check running containers
+        run: docker ps -a
+      - name: Check Nakadi lists event types
+        run: curl 127.0.0.1:8080/evnet-types
 

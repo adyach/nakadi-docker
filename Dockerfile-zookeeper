@@ -2,7 +2,7 @@ FROM openjdk:8-alpine
 
 MAINTAINER andrey.dyachkov@gmail.com
 
-ENV ZOOKEEPER_VERSION=3.5.8
+ENV ZOOKEEPER_VERSION=3.6.3
 
 #Download Zookeeper
 RUN wget -q https://downloads.apache.org/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz && \
