@@ -67,6 +67,8 @@ jobs:
         run: |
           docker-compose -f docker-compose-github.yml up -d
           docker logs -f nakadi-docker_nakadi_1
+          sleep 30
+          curl -vvv http://localhost:8080/event-types/nakadi.access.log
 #          x=1
 #          while [[ x -lt 10 ]]; do
 #            res=$(curl -s -w "%{http_code}" -o /dev/null http://localhost:8080/event-types/nakadi.access.log)
