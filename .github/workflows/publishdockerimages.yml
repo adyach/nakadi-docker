@@ -23,7 +23,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build nakadi image
-        run: docker buildx build --file Dockerfile --platform linux/amd64,linux/arm64 --tag image .
+        run: | 
+          docker buildx create
+          docker buildx build --file Dockerfile --platform linux/amd64,linux/arm64 --tag image .
 
       - name: Push versioned nakadi image
         run: |
@@ -36,7 +38,9 @@ jobs:
           docker push $IMAGE_ID:$NAKADI_VERSION
 
       - name: Build postgres image
-        run: docker buildx build --file Dockerfile-postgres --platform linux/amd64,linux/arm64 --tag image .
+        run: |
+          docker buildx create
+          docker buildx build --file Dockerfile-postgres --platform linux/amd64,linux/arm64 --tag image .
 
       - name: Push postgres image
         run: |
