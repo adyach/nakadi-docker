@@ -24,7 +24,8 @@ jobs:
 
       - name: Build nakadi image
         run: | 
-          docker buildx create
+          docker buildx ls
+          docker buildx create --use
           docker buildx build --file Dockerfile --platform linux/amd64,linux/arm64 --tag image .
 
       - name: Push versioned nakadi image
