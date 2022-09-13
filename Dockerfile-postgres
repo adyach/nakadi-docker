@@ -6,6 +6,6 @@ RUN mkdir nakadi
 WORKDIR /nakadi
 RUN apk add git && git clone https://github.com/zalando/nakadi.git .
 
-FROM postgres:13.6
+FROM postgres:14.5
 COPY --from=scripts /nakadi/database/nakadi /docker-entrypoint-initdb.d
 

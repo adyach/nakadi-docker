@@ -1,6 +1,6 @@
-FROM openjdk:11.0.6-jdk-stretch as builder
+FROM openjdk:11.0.16-jdk-slim as builder
 
-MAINTAINER andrey.dyachkov@gmail.com
+LABEL maintainer="andrey.dyachkov@gmail.com"
 
 RUN mkdir nakadi
 WORKDIR /nakadi
@@ -11,7 +11,7 @@ RUN cp nakadi-authz-file-plugin-0.2.jar plugins/nakadi-authz-file-plugin-0.2.jar
 RUN chmod u+x gradlew
 RUN ./gradlew assemble
 
-FROM openjdk:11.0.6-jdk-slim
+FROM openjdk:11.0.16-jdk-slim
 
 # configure Nakadi
 COPY --from=builder /nakadi/app/build/libs/app.jar nakadi.jar
