@@ -1,4 +1,4 @@
-name: ci
+name: Build Nakadi and Postgres images
 
 on:
   push:
@@ -43,6 +43,6 @@ jobs:
 
       - name: Check Nakadi lists event types
         run: |
-          docker-compose -f docker-compose-github.yml up -d
+          docker-compose -f docker-compose.yml up -d
           sleep 30
           curl --fail http://localhost:8080/event-types/nakadi.access.log
