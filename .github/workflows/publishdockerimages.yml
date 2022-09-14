@@ -6,6 +6,10 @@ on:
       - master
       - main
 
+env:
+  PG_IMAGE_NAME: postgres
+  NAKADI_IMAGE_NAME: nakadi
+
 jobs:
   buildx:
     runs-on: ubuntu-latest
