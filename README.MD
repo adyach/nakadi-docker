@@ -1,3 +1,5 @@
+[![Build and push `latest`](https://github.com/adyach/nakadi-docker/actions/workflows/publishdockerimages.yml/badge.svg?branch=master)](https://github.com/adyach/nakadi-docker/actions/workflows/publishdockerimages.yml)
+
 # Why and where
 - There is no official docker image for Nakadi
 
