@@ -1,6 +1,5 @@
 # Why and where
 - There is no official docker image for Nakadi
-- Published in docker hub registry: https://hub.docker.com/r/adyach/nakadi-docker
 
 # How to run it
 ## Using Nakadi project provided dependencies
@@ -29,3 +28,12 @@ Note: the setup was tested against [integration smoke test](https://github.com/z
 ```
 docker-compose up
 ```
+
+# How to release new version
+Open PR to change version in `.github/workflows/buildx.yml` 
+```
+env:
+  NAKADI_VERSION: 3.5
+```
+
+Once branch is built, the new version image will be published under NAKADI_VERSION tag. After that merge to master, the latest tag will be published.

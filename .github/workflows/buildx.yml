@@ -1,10 +1,18 @@
-name: Build and push `latest`
+name: Build and push Nakadi version
 
 on:
   push:
     branches:
-      - master
+      - 'pr**'
+  pull_request:
+    branches:
+      - master 
       - main
+
+env:
+  NAKADI_VERSION: 3.5
+  PG_IMAGE_NAME: postgres
+  NAKADI_IMAGE_NAME: nakadi
 
 jobs:
   buildx:
@@ -30,14 +38,14 @@ jobs:
           IMAGE_ID=ghcr.io/${{ github.repository }}/$NAKADI_IMAGE_NAME
 
           docker buildx create --use
-          docker buildx build --file Dockerfile --platform linux/amd64,linux/arm64 --tag $IMAGE_ID:latest --push .
+          docker buildx build --file Dockerfile --platform linux/amd64,linux/arm64 --tag $IMAGE_ID:$NAKADI_VERSION --push .
 
       - name: Build and push Postgres image
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository }}/$PG_IMAGE_NAME
 
           docker buildx create --use
-          docker buildx build --file Dockerfile-postgres --platform linux/amd64,linux/arm64 --tag $IMAGE_ID:latest --push .
+          docker buildx build --file Dockerfile-postgres --platform linux/amd64,linux/arm64 --tag $IMAGE_ID:$NAKADI_VERSION --push .
 
       - name: Check Nakadi lists event types
         run: |
