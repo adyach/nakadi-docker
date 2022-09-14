@@ -1,7 +1,13 @@
-name: Build Nakadi and Postgres images
+name: Build and push Nakadi version
 
 on:
   push:
+    branches:
+      - 'pr**'
+  pull_request:
+    branches:
+      - master 
+      - main
 
 env:
   NAKADI_VERSION: 3.5
